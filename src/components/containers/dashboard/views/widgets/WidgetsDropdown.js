@@ -19,7 +19,7 @@ const WidgetsDropDown = () => {
   const { loading } = commonLoading ;
 
   const mainAccountBal =
-    mainAccount.length && mainAccount.map(acc =>{
+    mainAccount.length && mainAccount.results.map(acc =>{
       return(
         <>
         <div className=" d-flex justify-content-between pr-3">

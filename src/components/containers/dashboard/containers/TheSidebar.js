@@ -22,9 +22,7 @@ const TheSidebar = () => {
   const dispatch = useDispatch();
   const account_image = useSelector(state => state.contributionReducer);
   const { mainAccount } = account_image;
-  const image =
-    mainAccount.length &&
-    mainAccount.map(acc => {
+  const image = mainAccount.length && mainAccount.map.results(acc => {
       return acc.bank_account_type["account_type_image"];
     });
   const useStyles = makeStyles(theme => ({
