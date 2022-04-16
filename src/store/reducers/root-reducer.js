@@ -11,26 +11,15 @@ import { LOGOUT } from "store/actions/ActionTypes";
 
 
 
-const appReducer = combineReducers({
+const rootReducer = combineReducers({
   form: formReducer,
   authReducer: auth,
   commonReducer: common,
   settings: Settings,
   dashboardReducer: toggleDashboard,
-  contributionReducer: contributions,
-
+  contributionReducer: contributions
 });
 
-const persistConfig = {
-  key: "root",
-  storage,
-  whitelist: []
-};
-const rootReducer = (state, action) => {
-  if (action.type === LOGOUT) {
-    state = undefined;
-  }
-  return appReducer(state, action);
-};
 
-export default persistReducer(persistConfig, rootReducer);
+
+export default rootReducer
