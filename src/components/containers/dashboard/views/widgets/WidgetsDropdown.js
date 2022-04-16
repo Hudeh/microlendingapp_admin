@@ -65,7 +65,7 @@ const WidgetsDropDown = () => {
            className="pt-4 pl-3"
            style={{ height: "170px", backgroundColor: "#B1882C", color: "#fff" }}
          >
-             {loading ? <CircularProgress/> :mainAccount.length===0? <p className="text-center">You have no wallet account</p>: mainAccountBal}
+             {loading ? <CircularProgress/> :mainAccount.length===0? <p className="text-center">You have no account setup yet</p>: mainAccountBal}
          </div>
        </CCol>
 
@@ -89,7 +89,7 @@ const WidgetsDropDown = () => {
           className="pt-4 pl-3"
           style={{ height: "170px", backgroundColor: "#0C5421", color: "#fff" }}
         >
-          {loading ? <CircularProgress/> :bonusAccount?bonusAccountBal:<p className="text-center">You have no wallet account</p>}
+          {loading ? <CircularProgress/> :bonusAccount.length===0?<p className="text-center">You have no wallet account setup yet</p>:bonusAccountBal}
         </div>
       </CCol>
     </CRow>
