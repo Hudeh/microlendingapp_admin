@@ -38,7 +38,7 @@ try {
 export const fetchBankAccountBonus = () => async(dispatch) =>{
 try {
   const res = await axiosInstance.get("account/get_bonus_account")
-  dispatch({type: actionTypes.FETCH_BANK_BONUS_SUCCESS , payload: res.data});
+  dispatch({type: actionTypes.FETCH_BANK_BONUS_SUCCESS , payload: res.data.data});
 } catch (error) {
   dispatch({type: actionTypes.FETCH_BANK_BONUS_FAIL, payload: error});
 }
