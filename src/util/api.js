@@ -5,12 +5,13 @@ const baseURL = 'http://127.0.0.1:8000/api/'
 
 
 const axiosInstance = axios.create({
-    baseURL: baseURL,
-    timeout: 50000,
-    headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-    },
+  baseURL: baseURL,
+  timeout: 50000,
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `JWT ${localStorage.getItem("access")}`,
+    Accept: "application/json"
+  }
 });
 
 axiosInstance.interceptors.response.use(

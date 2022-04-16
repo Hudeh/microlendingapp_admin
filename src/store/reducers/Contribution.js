@@ -4,7 +4,7 @@ const INITIAL_STATE = {
     dailyContributions: [],
     monthlyContributions:[],
     mainAccount:[],
-    bonusAccount:[],
+    bonusAccount:{},
     isLoading: false
     
 }
@@ -33,7 +33,7 @@ const auction = (state=INITIAL_STATE, action) => {
     case actionTypes.FETCH_BANK_BONUS_SUCCESS:
       return {
         ...state,
-        bonusAccount: action.payload,
+        bonusAccount: action.payload.data,
         isLoading: false
       };
     case actionTypes.FETCH_CONTRIBUTION_TARGET_FAIL:

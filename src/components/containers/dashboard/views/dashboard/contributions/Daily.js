@@ -56,7 +56,7 @@ const Auction = () => {
                 ) : dailyContributions.length ? (
                   dailyContributions.map((bid) => {
                     const {
-                      id,
+                      TransID,
                       amount,
                       account,
                       balance_after_transaction,
@@ -83,9 +83,9 @@ const Auction = () => {
                         : "text-white bg-grey";
                     return (
                       <tbody>
-                        <tr key={id}>
+                        <tr key={TransID}>
                           <td className="text-center">
-                            <div>{id}</div>
+                            <div>{TransID}</div>
                           </td>
                           <td className="text-center">
                             <div>{account['bank_account_no']}</div>

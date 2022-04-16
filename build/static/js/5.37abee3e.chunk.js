@@ -1,2 +1,0 @@
-(this.webpackJsonpogadonate=this.webpackJsonpogadonate||[]).push([[5],{1102:function(t,e,n){"use strict";n.r(e);var c=n(2),a=n(3),o=Object(c.lazy)((function(){return n.e(8).then(n.bind(null,1101))}));e.default=function(){return Object(c.useEffect)((function(){document.title="Ogadonate | Dashboard"}),[]),Object(a.jsx)(a.Fragment,{children:Object(a.jsx)("div",{children:Object(a.jsx)(o,{})})})}}}]);
-//# sourceMappingURL=5.37abee3e.chunk.js.map

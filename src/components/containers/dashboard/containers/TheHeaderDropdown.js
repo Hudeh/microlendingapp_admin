@@ -32,31 +32,24 @@ const TheHeaderDropdown = ({history}) => {
   }
 
   const classes = useStyles();
-  return (
-    <CDropdown inNav className="c-header-nav-items mx-2" direction="down">
+  return <CDropdown inNav className="c-header-nav-items mx-2" direction="down">
       <CDropdownToggle className="c-header-nav-link" caret={false}>
         <div className="c-avatar">
-          <Avatar className={classes.orange}>{user == null ? " ":user.username.substring(0,1).toUpperCase()}</Avatar>
+          <Avatar className={classes.orange}>
+            {user ? user.username.substring(0, 1).toUpperCase() : "D"}
+          </Avatar>
         </div>
       </CDropdownToggle>
 
       <CDropdownMenu className="pt-0" placement="bottom-end">
         <CDropdownItem>
           <CIcon content={freeSet.cilSpeedometer} className="mfe-2" />
-          <CLink
-            className="c-subheader-nav-link"
-            aria-current="page"
-            to="/dashboard"
-          >
+          <CLink className="c-subheader-nav-link" aria-current="page" to="/dashboard">
             Dashboard
           </CLink>
         </CDropdownItem>
         <CDropdownItem>
-          <CLink
-            className="c-subheader-nav-link"
-            aria-current="page"
-            to="/dashboard/profile"
-          >
+          <CLink className="c-subheader-nav-link" aria-current="page" to="/dashboard/profile">
             <CIcon name="cil-user" className="mfe-2" />
             Profile
           </CLink>
@@ -67,8 +60,7 @@ const TheHeaderDropdown = ({history}) => {
           {isAuthenticated ? "Log out" : "Login"}
         </CDropdownItem>
       </CDropdownMenu>
-    </CDropdown>
-  );
+    </CDropdown>;
 };
 
 export default withRouter(TheHeaderDropdown);

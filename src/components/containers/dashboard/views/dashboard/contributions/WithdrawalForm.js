@@ -8,45 +8,47 @@ import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
-import { withRouter } from "react-router-dom";
 import CircularProgress from "util/CircularProgress";
+var numeral = require("numeral");
 
-
-const ProjectForm = ({ mime, handleSubmit, submitting, pristine, history }) => {
+const ProjectForm = ({history}) => {
   const dispatch = useDispatch();
   const auctionState = useSelector((state) => state.commonReducer);
+  const balanceState = useSelector((state) => state.contributionReducer);
+  const {mainAccount,bonusAccount} = balanceState
   const { loading } = auctionState;
-  const onSubmit = async (formValues) => {
-    let formData = new FormData();
-    formData.append("request_date", formValues.request_date);
-    formData.append("request_reasons", formValues.request_reasons);
-    formData.append("request_amount", formValues.request_amount);
-
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `JWT ${localStorage.getItem("access")}`,
-        Accept: "application/json",
-      },
-    };
-
+  const [formValue, SetformValue] = useState({
+    request_expected_date:"",
+    request_reasons:"",
+    request_amount:"",
+    request_from_account:"",
+  })
+  const handleChange = (event) => {
+    let value = event.target.value;
+    let name = event.target.name;
+  
+    SetformValue((prevalue) => {
+      return {
+        ...prevalue,   // Spread Operator               
+        [name]: value
+      }
+    })
+  }
+  const handleSubmit = async () => {
     dispatch(setLoading());
     try {
-      const res = await axiosInstance.post("request/withdrawal", formData, config);
+      const res = await axiosInstance.post("request/withdrawal", {...formValue});
       dispatch({ type: actionTypes.SHOW_SUCCESS_MESSAGE, payload: "Request Submitted" });
-      dispatch(stopSubmit("requestForm"));
-      dispatch(reset("requestForm"));
       dispatch(offLoading());
     } catch (error) {
       dispatch({ type: actionTypes.CREATE_PROJECT_FAIL });
-      dispatch({ type: actionTypes.SHOW_ERROR_MESSAGE, payload: error.response.message });
-      dispatch(stopSubmit("requestForm"));
-      dispatch(reset("requestForm"));
+      dispatch({ type: actionTypes.SHOW_ERROR_MESSAGE, payload: "Check all field" });
       dispatch(offLoading());
     }
   };
 
-  
+  const Main = formValue.request_from_account === 'Main' && parseInt(formValue.request_amount) > parseInt(mainAccount[0].bank_account_balance)
+  const Wallet = formValue.request_from_account === 'Wallet' && parseInt(formValue.request_amount) > parseInt(bonusAccount[0].wallet_balance)
   const [activeStep, setActiveStep] = useState(0);
   const getSteps = () => {
     return ["Reason", "Amount", "Date"];
@@ -70,14 +72,13 @@ const ProjectForm = ({ mime, handleSubmit, submitting, pristine, history }) => {
     return (
       <fieldset>
         <h2 className="fs-title text-uppercase font-weight-bold">Reason For Withdrawal</h2>
-        <Field
-          type="text"
+        <input
+          type="textarea"
           className="input-textarea"
           name="request_reasons"
-          component="textarea"
           placeholder="breif reasons for withdrawal"
+            onChange={handleChange}
         />
-        
       </fieldset>
     );
   };
@@ -86,7 +87,7 @@ const ProjectForm = ({ mime, handleSubmit, submitting, pristine, history }) => {
     return (
       <fieldset>
         <h2 className="fs-title mt-4 text-uppercase font-weight-bold">Request Expected Date</h2>
-        <Field type="date" name="request_date" component="input" className="input-date" />
+        <input onChange={handleChange} type="date" name="request_expected_date" className="input-date" />
       </fieldset>
     );
   };
@@ -94,14 +95,22 @@ const ProjectForm = ({ mime, handleSubmit, submitting, pristine, history }) => {
   const getAmount = () => {
     return (
       <fieldset>
+        <select name="request_from_account" className="input-textarea"onChange={handleChange}>
+            <option>Select Account</option>
+            <option value="Main">Main</option>
+            <option value="Wallet">Wallet</option>
+          </select>
         <h2 className="fs-title text-uppercase font-weight-bold">Amount</h2>
-        <Field
-          type="number"
+        <input
+          type="text"
           className="input-text"
           placeholder="amount needed?"
-          component="input"
           name="request_amount"
+          onChange={handleChange}
         />
+        {Main ?
+          <p className='text-danger'>amount can't be greater than balance: ₦{numeral(mainAccount[0].bank_account_balance).format("0,0")}</p> :
+          Wallet ? <p className='text-danger'>amount can't be greater than balance: ₦{numeral(bonusAccount[0].wallet_balance).format("0,0")}</p>:null}
       </fieldset>
     );
   };
@@ -120,7 +129,7 @@ const ProjectForm = ({ mime, handleSubmit, submitting, pristine, history }) => {
   return (
     <>
       <div className="d-flex mt-5 justify-content-center">
-        <form onSubmit={handleSubmit(onSubmit)} className="fundforms_container">
+        <form onSubmit={handleSubmit} className="fundforms_container">
           <div>
             <Stepper activeStep={activeStep} alternativeLabel className="horizontal-stepper-linear">
               {steps.map((label, index) => {
@@ -162,7 +171,9 @@ const ProjectForm = ({ mime, handleSubmit, submitting, pristine, history }) => {
                       variant="contained"
                       color="primary"
                       onClick={handleNext}
-                    // disabled={true}
+                      disabled={parseInt(formValue.request_amount) > parseInt(mainAccount[0].bank_account_balance)
+                      || parseInt(formValue.request_amount) > parseInt(bonusAccount[0].wallet_balance)
+                      }
                     >
                       {activeStep === steps.length - 1 ? "Finish" : "Next"}
                     </Button>
@@ -182,11 +193,12 @@ const ProjectForm = ({ mime, handleSubmit, submitting, pristine, history }) => {
                       type="submit"
                       name="submit"
                       className="MuiButton-containedPrimary"
-                      disabled={pristine || submitting}
+                      disabled={formValue.request_amount === '' || formValue.request_expected_date=== '' ||
+                    formValue.request_from_account === '' ||formValue.request_reasons === '' }
                       onClick={() => {
                         setTimeout(() => {
                           handleReset();
-                        }, 7000);
+                        }, 5000);
                       }}
                     >
                       {loading ? <CircularProgress/>: "Submit"}
@@ -201,8 +213,5 @@ const ProjectForm = ({ mime, handleSubmit, submitting, pristine, history }) => {
   );
 };
 
-export default withRouter(
-  reduxForm({
-    form: "requestForm",
-  })(ProjectForm)
-);
+export default ProjectForm
+;

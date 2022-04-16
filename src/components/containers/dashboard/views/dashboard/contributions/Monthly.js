@@ -85,9 +85,9 @@ const Monthly = () => {
 
                     return (
                       <tbody>
-                        <tr key={bid.id}>
+                        <tr key={bid.TransID}>
                           <td className="text-center">
-                            <div>{bid.id}</div>
+                            <div>{bid.TransID}</div>
                           </td>
                           <td className="text-center">
                             <div>{bid.account["bank_account_no"]}</div>

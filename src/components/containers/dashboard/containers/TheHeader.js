@@ -72,7 +72,7 @@ const TheHeader = () => {
         />
         <div className="d-md-down-none mfe-2 c-subheader-nav">
           <CLink className="c-subheader-nav-link" href="#">
-          {user ? <p>Welcome: <span><strong> {user.username.charAt(0).toUpperCase() + user.username.slice(1)}</strong></span></p>:"De-Ghauzi" }
+          {user ? <p>Welcome: <span><strong> {user.username.charAt(0).toUpperCase() + user.username.slice(1)}</strong></span></p>:"Welcome" }
           </CLink>
         </div>
       </CSubheader>
