@@ -51,11 +51,11 @@ const Monthly = () => {
                     <CircularProgress />
                   </div>
                 ) : monthlyContributions.length ? (
-                  monthlyContributions.map((bid) => {
+                  monthlyContributions.results.map((bid) => {
                     const contribution_type =
                       bid.contribution_type === 1
                         ? "Year Contribution"
-                        : bid.contribution_type == 2
+                        : bid.contribution_type === 2
                         ? "Sallah Contribution"
                         : bid.contribution_type === 3
                         ? "Hajj/Umrah Pilgrimage"
@@ -77,7 +77,7 @@ const Monthly = () => {
                     const transactionStyle =
                       bid.transaction_type === 1
                         ? "text-white bg-success"
-                        : bid.transaction_type == 2
+                        : bid.transaction_type === 2
                         ? "text-white bg-danger"
                         : bid.transaction_type === 3
                         ? "bg-amber"

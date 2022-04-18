@@ -54,7 +54,7 @@ const Auction = () => {
                     <CircularProgress />
                   </div>
                 ) : dailyContributions.length ? (
-                  dailyContributions.map((bid) => {
+                  dailyContributions.results.map((bid) => {
                     const {
                       TransID,
                       amount,
