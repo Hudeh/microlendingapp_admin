@@ -10,11 +10,11 @@ var numeral = require("numeral");
 
 
 const Monthly = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(fetchMonthlyContributions());
-  // }, []);
+  useEffect(() => {
+    dispatch(fetchMonthlyContributions());
+  }, []);
 
   const contributionState = useSelector((state) => state.contributionReducer);
   const { monthlyContributions} = contributionState;

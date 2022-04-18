@@ -7,11 +7,11 @@ import CircularProgress from "util/CircularProgress";
 var numeral = require("numeral");
 
 const Auction = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(fetchDailyContributions());
-  // }, []);
+  useEffect(() => {
+    dispatch(fetchDailyContributions());
+  }, []);
 
   const auctionState = useSelector((state) => state.contributionReducer);
   const { dailyContributions, isLoading } = auctionState;
