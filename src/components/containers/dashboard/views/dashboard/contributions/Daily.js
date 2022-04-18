@@ -34,7 +34,7 @@ const Auction = () => {
                     <th className="text-center">Balance</th>
                     <th className="text-center">Created By</th>
                     <th className="text-center">Date</th>
-                    <th className="text-center">Status</th>
+                    <th className="text-center">Trans Type</th>
                   </tr>
                 </thead>
 
