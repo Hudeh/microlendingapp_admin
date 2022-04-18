@@ -5,7 +5,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { load_user, checkAuthenticated } from "./store/actions/Auth";
 import MainApp from "./components/mainApp";
 import { hideMessage } from "store/actions/Common";
-import { BrowserRouter} from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import { fetchMonthlyContributions, fetchDailyContributions } from "store/actions/Contributions";
+import { fetchBankAccountBonus,fetchBankAccountMain } from "store/actions/Contributions";
 import "./styles/style.js";
 
 
@@ -20,7 +22,13 @@ const App = () => {
   useEffect(() => {
     dispatch(checkAuthenticated());
     dispatch(load_user())
-    setIsLoading(false);
+    if (isAuthenticated) {  
+      setIsLoading(false);
+      dispatch(fetchBankAccountMain());
+      dispatch(fetchBankAccountBonus());
+      dispatch(fetchDailyContributions());
+      dispatch(fetchMonthlyContributions());
+    }
   }, []);
 
   // check auth state

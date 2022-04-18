@@ -10,11 +10,11 @@ var numeral = require("numeral");
 
 
 const Monthly = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchMonthlyContributions());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchMonthlyContributions());
+  // }, []);
 
   const contributionState = useSelector((state) => state.contributionReducer);
   const { monthlyContributions} = contributionState;
@@ -51,7 +51,7 @@ const Monthly = () => {
                     <CircularProgress />
                   </div>
                 ) : monthlyContributions.length ? (
-                  monthlyContributions.results.map((bid) => {
+                  monthlyContributions.map((bid) => {
                     const contribution_type =
                       bid.contribution_type === 1
                         ? "Year Contribution"

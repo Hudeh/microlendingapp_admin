@@ -17,13 +17,19 @@ const auction = (state=INITIAL_STATE, action) => {
     case actionTypes.FETCH_CONTRIBUTION_DAILY_SUCCESS:
       return {
         ...state,
-        dailyContributions: action.payload,
+        dailyContributions: action.payload.results,
+        main_count: action.payload.results,
+        main_next: action.payload.next,
+        main_previous:action.payload.previous,
         isLoading: false
       };
     case actionTypes.FETCH_CONTRIBUTION_TARGET_SUCCESS :
       return {
         ...state,
-        monthlyContributions: action.payload,
+        monthlyContributions: action.payload.results,
+        main_count: action.payload.results,
+        main_next: action.payload.next,
+        main_previous:action.payload.previous,
         isLoading: false
       };
     case actionTypes.FETCH_BANK_MAIN_SUCCESS:
