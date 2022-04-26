@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Field, reduxForm, stopSubmit, reset } from "redux-form";
+import React, { useState,useEffect } from "react";
 import axiosInstance from "util/api";
 import { setLoading, offLoading } from "store/actions/Common";
 import * as actionTypes from "store/actions/ActionTypes";
@@ -9,10 +8,20 @@ import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "util/CircularProgress";
+import { load_user } from 'store/actions/Auth.js';
+import { fetchBankAccountBonus, fetchBankAccountMain } from "store/actions/Contributions";
+
 var numeral = require("numeral");
 
 const ProjectForm = ({history}) => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+     dispatch(load_user());
+    dispatch(fetchBankAccountMain());
+    dispatch(fetchBankAccountBonus());
+  }, [])
+
   const auctionState = useSelector((state) => state.commonReducer);
   const balanceState = useSelector((state) => state.contributionReducer);
   const {mainAccount,bonusAccount} = balanceState
@@ -20,20 +29,15 @@ const ProjectForm = ({history}) => {
   const [formValue, SetformValue] = useState({
     request_expected_date:"",
     request_reasons:"",
-    request_amount:"",
+    request_amount: "",
     request_from_account:"",
   })
-  const handleChange = (event) => {
-    let value = event.target.value;
-    let name = event.target.name;
+ const handleChange = (e) => {
+    const { name, value } = e.target;
+    SetformValue((prev) => ({ ...prev, [name]: value }));
+  };
   
-    SetformValue((prevalue) => {
-      return {
-        ...prevalue,   // Spread Operator               
-        [name]: value
-      }
-    })
-  }
+
   const handleSubmit = async () => {
     dispatch(setLoading());
     try {
@@ -47,8 +51,8 @@ const ProjectForm = ({history}) => {
     }
   };
 
-  const Main = formValue.request_from_account === 'Main' && parseInt(formValue.request_amount) > parseInt(mainAccount[0].bank_account_balance)
-  const Wallet = formValue.request_from_account === 'Wallet' && parseInt(formValue.request_amount) > parseInt(bonusAccount[0].wallet_balance)
+  const Main = formValue.request_from_account === 'Main' && parseInt(formValue.request_amount) >= parseInt(mainAccount[0].bank_account_balance)
+  const Wallet = formValue.request_from_account === 'Wallet' && parseInt(formValue.request_amount) >= parseInt(bonusAccount.wallet_balance)
   const [activeStep, setActiveStep] = useState(0);
   const getSteps = () => {
     return ["Reason", "Amount", "Date"];
@@ -110,7 +114,7 @@ const ProjectForm = ({history}) => {
         />
         {Main ?
           <p className='text-danger'>amount can't be greater than balance: ₦{numeral(mainAccount[0].bank_account_balance).format("0,0")}</p> :
-          Wallet ? <p className='text-danger'>amount can't be greater than balance: ₦{numeral(bonusAccount[0].wallet_balance).format("0,0")}</p>:null}
+          Wallet ? <p className='text-danger'>amount can't be greater than balance: ₦{numeral(bonusAccount.wallet_balance).format("0,0")}</p>:null}
       </fieldset>
     );
   };
@@ -162,7 +166,7 @@ const ProjectForm = ({history}) => {
                     <Button
                       className="mr-2 float-left"
                       color="primary"
-                      onClick={() => history.push("/")}
+                      onClick={() => { history.push("/"); SetformValue({})}}
                     >
                       Cancel
                     </Button>
@@ -171,9 +175,6 @@ const ProjectForm = ({history}) => {
                       variant="contained"
                       color="primary"
                       onClick={handleNext}
-                      disabled={parseInt(formValue.request_amount) > parseInt(mainAccount[0].bank_account_balance)
-                      || parseInt(formValue.request_amount) > parseInt(bonusAccount[0].wallet_balance)
-                      }
                     >
                       {activeStep === steps.length - 1 ? "Finish" : "Next"}
                     </Button>
@@ -194,7 +195,10 @@ const ProjectForm = ({history}) => {
                       name="submit"
                       className="MuiButton-containedPrimary"
                       disabled={formValue.request_amount === '' || formValue.request_expected_date=== '' ||
-                    formValue.request_from_account === '' ||formValue.request_reasons === '' }
+                        formValue.request_from_account === '' || formValue.request_reasons === '' ||
+                        parseInt(formValue.request_amount) >= parseInt(bonusAccount.wallet_balance) ||
+                        parseInt(formValue.request_amount) >= parseInt(mainAccount[0].bank_account_balance)
+                      }
                       onClick={() => {
                         setTimeout(() => {
                           handleReset();
@@ -202,7 +206,10 @@ const ProjectForm = ({history}) => {
                       }}
                     >
                       {loading ? <CircularProgress/>: "Submit"}
-                  </Button>
+                    </Button>
+                    {Main ?
+          <p className='text-danger'>amount can't be greater than balance: ₦{numeral(mainAccount[0].bank_account_balance).format("0,0")}</p> :
+          Wallet ? <p className='text-danger'>amount can't be greater than balance: ₦{numeral(bonusAccount.wallet_balance).format("0,0")}</p>:null}
                   </>
                 )}
             </div>

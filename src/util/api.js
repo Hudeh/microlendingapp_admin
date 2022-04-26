@@ -32,7 +32,6 @@ axiosInstance.interceptors.response.use(
 
                 // exp date in token is expressed in seconds, while now() returns milliseconds:
                 const now = Math.ceil(Date.now() / 1000);
-                console.log(tokenParts.exp);
 
                 if (tokenParts.exp > now) {
                     return axiosInstance
@@ -55,11 +54,11 @@ axiosInstance.interceptors.response.use(
                         });
                 } else {
                     console.log('Refresh token is expired', tokenParts.exp, now);
-                    window.location.href = '/auth';
+                    window.location.href = '/';
                 }
             } else {
                 console.log('Refresh token not available.');
-                window.location.href = '/auth';
+                window.location.href = '/';
             }
         }
 

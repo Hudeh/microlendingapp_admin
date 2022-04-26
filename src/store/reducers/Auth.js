@@ -8,7 +8,7 @@ const initialState = {
   refresh: localStorage.getItem("refresh"),
   isAuthenticated: false,
   accountCreated: null,
-  user: [],
+  user: localStorage.getItem("de_user")
 };
 
 const auth = (state = initialState, action) => {
@@ -36,6 +36,7 @@ const auth = (state = initialState, action) => {
       error: false,
     };
     case actionTypes.USER_LOADED_SUCCESS:
+      localStorage.setItem("de_user");
     return {
       ...state,
       user: payload,
@@ -70,6 +71,7 @@ const auth = (state = initialState, action) => {
     case actionTypes.LOGOUT:
       localStorage.removeItem("access");
       localStorage.removeItem("refresh");
+      localStorage.removeItem("de_user");
       return {
         ...state,
         access: null,

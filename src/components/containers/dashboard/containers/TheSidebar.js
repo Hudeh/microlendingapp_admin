@@ -44,8 +44,8 @@ const TheSidebar = () => {
       }}
     >
       <CSidebarBrand className="d-md-down-none" to="/">
-        <CIcon  name="cil-lock-locked" height={15} />
-        <CIcon className="c-sidebar-brand-minimized" name="sygnet" height={5} />
+        <h4 className="text-center">De-Ghauzi</h4>
+        <CIcon className="c-sidebar-brand-minimized" name="sygnet" height={10} /> 
       </CSidebarBrand>
       <CSidebarNav>
         <CCreateElement

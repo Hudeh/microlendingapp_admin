@@ -28,9 +28,7 @@ import {
 
 const TheHeader = () => {
   const dispatch = useDispatch();
-  const UserState = useSelector(state => state.authReducer);
-  const {user} = UserState;
-  console.log(user)
+  const user  = localStorage.getItem("de_user");
   const toggleSidebar = () => {
     dispatch(toggleDashboardSideNav());
   };
@@ -52,7 +50,7 @@ const TheHeader = () => {
         onClick={toggleSidebar}
       />
       <CHeaderBrand className="mx-auto d-lg-none" to="/">
-        <CIcon name="logo" height="48" alt="Logo" />
+        <h4 className="text-center">De-Ghauzi</h4>
       </CHeaderBrand>
 
       <CHeaderNav className="d-md-down-none mr-auto">
@@ -72,7 +70,7 @@ const TheHeader = () => {
         />
         <div className="d-md-down-none mfe-2 c-subheader-nav">
           <CLink className="c-subheader-nav-link" href="#">
-          {user ? <p>Welcome: <span><strong> {user.username.charAt(0).toUpperCase() + user.username.slice(1)}</strong></span></p>:"Welcome" }
+          {user ? <p>Welcome: <span><strong> {user.charAt(0).toUpperCase() + user.slice(1)}</strong></span></p>:"Welcome" }
           </CLink>
         </div>
       </CSubheader>

@@ -34,10 +34,9 @@ const Monthly = () => {
                 {/* table header */}
                 <thead className="thead-light">
                   <tr>
+                    <th className="text-center">S/N</th>
                     <th className="text-center">TransID</th>
-                    <th className="text-center">Account No</th>
                     <th className="text-center">Amount</th>
-                    <th className="text-center">Created By</th>
                     <th className="text-center">Date</th>
                     <th className="text-center">Type</th>
                     <th className="text-center">Trans Type</th>
@@ -51,7 +50,7 @@ const Monthly = () => {
                     <CircularProgress />
                   </div>
                 ) : monthlyContributions.length ? (
-                  monthlyContributions.map((bid) => {
+                  monthlyContributions.map((bid,index) => {
                     const contribution_type =
                       bid.contribution_type === 1
                         ? "Year Contribution"
@@ -87,16 +86,13 @@ const Monthly = () => {
                       <tbody>
                         <tr key={bid.TransID}>
                           <td className="text-center">
+                            <div>{index +1}</div>
+                          </td>
+                          <td className="text-center">
                             <div>{bid.TransID}</div>
                           </td>
                           <td className="text-center">
-                            <div>{bid.account["bank_account_no"]}</div>
-                          </td>
-                          <td className="text-center">
                             <div>₦{numeral(bid.contribution_amount).format("0,0")}</div>
-                          </td>
-                          <td className="text-center">
-                            <div>{bid.created_by_admin_user}</div>
                           </td>
                           <td className="text-center">
                             <div>{bid.created.substring(0, 10)}</div>

@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   monthlyContributions: [],
   mainAccount: [],
   bonusAccount: {},
-  isLoading: false,
+  isLoading: true,
   main_count: "",
   main_next: "",
   main_previous: ""
@@ -18,7 +18,7 @@ const auction = (state=INITIAL_STATE, action) => {
       return {
         ...state,
         dailyContributions: action.payload.results,
-        main_count: action.payload.results,
+        main_count: action.payload.count,
         main_next: action.payload.next,
         main_previous:action.payload.previous,
         isLoading: false
@@ -27,7 +27,7 @@ const auction = (state=INITIAL_STATE, action) => {
       return {
         ...state,
         monthlyContributions: action.payload.results,
-        main_count: action.payload.results,
+        main_count: action.payload.count,
         main_next: action.payload.next,
         main_previous:action.payload.previous,
         isLoading: false
@@ -36,7 +36,7 @@ const auction = (state=INITIAL_STATE, action) => {
       return {
         ...state,
         mainAccount: action.payload.results,
-        main_count: action.payload.results,
+        main_count: action.payload.count,
         main_next: action.payload.next,
         main_previous:action.payload.previous,
         isLoading: false

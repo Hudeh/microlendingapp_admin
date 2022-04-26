@@ -18,7 +18,8 @@ import { freeSet } from '@coreui/icons'
 const TheHeaderDropdown = ({history}) => {
   const dispatch = useDispatch();
   const authState = useSelector(state => state.authReducer)
-  const {isAuthenticated,user} = authState;
+  const { isAuthenticated } = authState;
+  const user = localStorage.getItem("de_user");
   const useStyles = makeStyles((theme) => ({
     orange: {
       color: theme.palette.getContrastText("#0B5B37"),
@@ -36,7 +37,7 @@ const TheHeaderDropdown = ({history}) => {
       <CDropdownToggle className="c-header-nav-link" caret={false}>
         <div className="c-avatar">
           <Avatar className={classes.orange}>
-            {user ? user.username.substring(0, 1).toUpperCase() : "D"}
+            {user ? user.substring(0, 1).toUpperCase() : "D"}
           </Avatar>
         </div>
       </CDropdownToggle>

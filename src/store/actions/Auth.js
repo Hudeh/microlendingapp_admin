@@ -39,7 +39,7 @@ export const load_user = () => async (dispatch) => {
 
     try {
       const res = await axiosInstance.get("auth/users/me/", config);
-      // localStorage.setItem("de_user",res.data)
+      localStorage.setItem("de_user",res.data.username)
       dispatch({
         type: USER_LOADED_SUCCESS,
         payload: res.data,

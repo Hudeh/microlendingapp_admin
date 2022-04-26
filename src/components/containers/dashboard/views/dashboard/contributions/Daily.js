@@ -8,14 +8,14 @@ var numeral = require("numeral");
 
 const Auction = () => {
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     dispatch(fetchDailyContributions());
-  }, []);
-
+  }, [dispatch]);
+  
   const auctionState = useSelector((state) => state.contributionReducer);
   const { dailyContributions, isLoading } = auctionState;
-
+console.log(dailyContributions)
   return (
     <>
       <h4 className="text-uppercase text-center mb-4 mt-4">Daily Contributions</h4>
@@ -28,11 +28,11 @@ const Auction = () => {
                 {/* table header */}
                 <thead className="thead-light">
                   <tr>
+                    <th className="text-center">S/N</th>
                     <th className="text-center">TransID</th>
                     <th className="text-center">Account No</th>
                     <th className="text-center">Amount</th>
                     <th className="text-center">Balance</th>
-                    <th className="text-center">Created By</th>
                     <th className="text-center">Date</th>
                     <th className="text-center">Trans Type</th>
                   </tr>
@@ -53,14 +53,13 @@ const Auction = () => {
                   >
                     <CircularProgress />
                   </div>
-                ) : dailyContributions.length ? (
-                  dailyContributions.map((bid) => {
+                ) : dailyContributions ? (
+                  dailyContributions.map((bid,index) => {
                     const {
                       TransID,
                       amount,
-                      account,
+                      bank_account,
                       balance_after_transaction,
-                      created_by_admin_user,
                       transaction_type,
                       created
                     } = bid;
@@ -76,7 +75,7 @@ const Auction = () => {
                     const transactionStyle =
                       transaction_type === 1
                         ? "text-white bg-success"
-                        : transaction_type == 2
+                        : transaction_type === 2
                         ? "text-white bg-danger"
                         : transaction_type === 3
                         ? "bg-amber"
@@ -85,19 +84,19 @@ const Auction = () => {
                       <tbody>
                         <tr key={TransID}>
                           <td className="text-center">
+                            <div>{index +1}</div>
+                          </td>
+                          <td className="text-center">
                             <div>{TransID}</div>
                           </td>
                           <td className="text-center">
-                            <div>{account['bank_account_no']}</div>
+                            <div>{bank_account['bank_account_no']}</div>
                           </td>
                           <td className="text-center">
                             <div>₦{numeral(amount).format("0,0")}</div>
                           </td>
                           <td className="text-center">
                             <div>₦{numeral(balance_after_transaction).format("0,0")}</div>
-                          </td>
-                          <td className="text-center">
-                            <div>{created_by_admin_user}</div>
                           </td>
                           <td className="text-center">
                             <div>{created.substring(0, 10)}</div>

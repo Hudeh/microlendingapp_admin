@@ -21,14 +21,7 @@ const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(checkAuthenticated());
-    dispatch(load_user())
-    if (isAuthenticated) {  
-      setIsLoading(false);
-      dispatch(fetchBankAccountMain());
-      dispatch(fetchBankAccountBonus());
-      dispatch(fetchDailyContributions());
-      dispatch(fetchMonthlyContributions());
-    }
+    setIsLoading(false)
   }, []);
 
   // check auth state
