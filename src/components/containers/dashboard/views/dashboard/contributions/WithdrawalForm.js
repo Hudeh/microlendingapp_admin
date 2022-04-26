@@ -195,9 +195,9 @@ const ProjectForm = ({history}) => {
                       name="submit"
                       className="MuiButton-containedPrimary"
                       disabled={formValue.request_amount === '' || formValue.request_expected_date=== '' ||
-                        formValue.request_from_account === '' || formValue.request_reasons === '' ||
-                        parseInt(formValue.request_amount) >= parseInt(bonusAccount.wallet_balance) ||
-                        parseInt(formValue.request_amount) >= parseInt(mainAccount[0].bank_account_balance)
+                        formValue.request_from_account === '' || formValue.request_reasons === ''||
+                        parseInt(formValue.request_amount) >= parseInt(bonusAccount.wallet_balance)
+                        // parseInt(formValue.request_amount) >= parseInt(mainAccount[0].bank_account_balance)
                       }
                       onClick={() => {
                         setTimeout(() => {
