@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://app-deghauzi.herokuapp.com/api/'
+const baseURL = "https://api-deghauzi.herokuapp.com/api/";
 // const baseURL = 'http://127.0.0.1:8000/api/'
 
 
