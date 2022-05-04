@@ -24,7 +24,7 @@ const Monthly = () => {
 
   return (
     <>
-      <h4 className="text-uppercase text-center mb-4 mt-4">Monthly Contributions</h4>
+      <h4 className="text-uppercase text-center mb-4 mt-4">Target Contributions</h4>
       <CRow>
         <CCol>
           <CCard>
