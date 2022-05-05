@@ -18,7 +18,7 @@ const Auction = () => {
 console.log(dailyContributions)
   return (
     <>
-      <h4 className="text-uppercase text-center mb-4 mt-4">Daily Contributions</h4>
+      <h4 className="text-uppercase text-center mb-4 mt-4">Regular Contributions</h4>
       <CRow>
         <CCol>
           <CCard>

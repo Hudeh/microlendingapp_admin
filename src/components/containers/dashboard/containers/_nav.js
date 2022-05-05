@@ -37,33 +37,16 @@ const _nav = [
     _children: [
       {
         _tag: "CSidebarNavItem",
-        name: "Daily Contribution",
+        name: "Regular Contributions",
         to: "/dashboard/contribution/daily"
       },
       {
         _tag: "CSidebarNavItem",
-        name: "Monthly Contribution",
+        name: "Targeted Contributions",
         to: "/dashboard/contribution/monthly"
       }
     ]
-  },
-  // {
-  //   _tag: "CSidebarNavDropdown",
-  //   name: "Project",
-  //   route: "/dashboard/donation",
-  //   icon: <SiCampaignmonitor className="mr-3" />,
-  //   _children: [
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Create Projects",
-  //       to: "/dashboard/project/create-project"
-  //     },  {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Project donations",
-  //       to: "/dashboard/donation/donation-received"
-  //     },
-  //   ]
-  // }
+  }
 ];
 
 export default _nav;
