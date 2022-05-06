@@ -8,11 +8,14 @@ import { fetchBankAccountBonus,fetchBankAccountMain } from "store/actions/Contri
 
 const TheLayout = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(load_user());
-    dispatch(fetchBankAccountMain());
-    dispatch(fetchBankAccountBonus());
-  }, [])
+  useEffect(
+    () => {
+      dispatch(load_user());
+      dispatch(fetchBankAccountMain());
+      dispatch(fetchBankAccountBonus());
+    },
+    [dispatch]
+  );
 
 
   return (

@@ -10,23 +10,11 @@ const _nav = [
     _tag: "CSidebarNavItem",
     name: "Dashboard",
     to: "/dashboard",
-    icon: (
-      <CIcon
-        content={freeSet.cilSpeedometer}
-        customClasses="c-sidebar-nav-icon"
-      />
-    )
+    icon: <CIcon content={freeSet.cilSpeedometer} customClasses="c-sidebar-nav-icon" />
   },
   {
     _tag: "CSidebarNavTitle",
     _children: ["User Information"]
-  },
-
-  {
-    _tag: "CSidebarNavItem",
-    name: "Profile",
-    icon: <CgProfile className="mr-3" />,
-    to: "/dashboard/profile"
   },
 
   {
@@ -44,6 +32,24 @@ const _nav = [
         _tag: "CSidebarNavItem",
         name: "Targeted Contributions",
         to: "/dashboard/contribution/monthly"
+      }
+    ]
+  },
+  {
+    _tag: "CSidebarNavDropdown",
+    name: "Settings",
+    route: "/dashboard/settings",
+    icon: <GiBuyCard className="mr-3" />,
+    _children: [
+      // {
+      //   _tag: "CSidebarNavItem",
+      //   name: "Profile",
+      //   to: "/dashboard/profile"
+      // },
+      {
+        _tag: "CSidebarNavItem",
+        name: "Change Password",
+        to: "/dashboard/settings/profile/ChangePassword"
       }
     ]
   }

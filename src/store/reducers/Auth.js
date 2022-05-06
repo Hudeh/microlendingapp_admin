@@ -8,7 +8,8 @@ const initialState = {
   refresh: localStorage.getItem("refresh"),
   isAuthenticated: false,
   accountCreated: null,
-  user: localStorage.getItem("de_user")
+  user: localStorage.getItem("de_user"),
+  isAdmin: false
 };
 
 const auth = (state = initialState, action) => {
@@ -21,8 +22,6 @@ const auth = (state = initialState, action) => {
       isAuthenticated: true,
     };
     case actionTypes.LOGIN_SUCCESS:
-    localStorage.setItem("access", payload.access);
-    localStorage.setItem("refresh", payload.refresh);
     return {
       ...state,
       isAuthenticated: true,
@@ -40,6 +39,7 @@ const auth = (state = initialState, action) => {
     return {
       ...state,
       user: payload,
+      isAdmin: payload.is_admin
     };
     case actionTypes.PASSWORD_RESET_SUCCESS:
     return {

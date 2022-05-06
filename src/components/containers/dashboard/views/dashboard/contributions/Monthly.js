@@ -14,7 +14,7 @@ const Monthly = () => {
 
   useEffect(() => {
     dispatch(fetchMonthlyContributions());
-  }, []);
+  }, [dispatch]);
 
   const contributionState = useSelector((state) => state.contributionReducer);
   const { monthlyContributions} = contributionState;

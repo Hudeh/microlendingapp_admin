@@ -15,14 +15,11 @@ import "./styles/style.js";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const isAuthenticated = useSelector(
-    state => state.authReducer.isAuthenticated
-  );
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(checkAuthenticated());
     setIsLoading(false)
-  }, []);
+  }, [dispatch]);
 
   // check auth state
   const commonState = useSelector(state => state.commonReducer);
