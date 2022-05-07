@@ -2,8 +2,8 @@ import React from "react";
 import CIcon from "@coreui/icons-react";
 import { freeSet } from "@coreui/icons";
 import { CgProfile } from "react-icons/cg";
-import { GiReceiveMoney, GiPayMoney, GiBuyCard } from "react-icons/gi";
-import { SiCampaignmonitor } from "react-icons/si";
+import {GiBuyCard } from "react-icons/gi";
+import { RiUserSettingsLine } from "react-icons/ri";
 
 const _nav = [
   {
@@ -19,18 +19,18 @@ const _nav = [
 
   {
     _tag: "CSidebarNavDropdown",
-    name: "Transactions",
+    name: "All Data",
     route: "/dashboard/transaction",
     icon: <GiBuyCard className="mr-3" />,
     _children: [
       {
         _tag: "CSidebarNavItem",
-        name: "Regular Contributions",
+        name: "All Regular Contributions",
         to: "/dashboard/contribution/daily"
       },
       {
         _tag: "CSidebarNavItem",
-        name: "Targeted Contributions",
+        name: "All Targeted Contributions",
         to: "/dashboard/contribution/monthly"
       }
     ]
@@ -39,7 +39,7 @@ const _nav = [
     _tag: "CSidebarNavDropdown",
     name: "Settings",
     route: "/dashboard/settings",
-    icon: <GiBuyCard className="mr-3" />,
+    icon: <RiUserSettingsLine className="mr-3" />,
     _children: [
       // {
       //   _tag: "CSidebarNavItem",

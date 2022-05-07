@@ -20,11 +20,6 @@ import navigation from "./_nav";
 
 const TheSidebar = () => {
   const dispatch = useDispatch();
-  const account_image = useSelector(state => state.contributionReducer);
-  const { mainAccount } = account_image;
-  const image = mainAccount.length && mainAccount.map(acc => {
-      return acc.bank_account_type["account_type_image"];
-    });
   const useStyles = makeStyles(theme => ({
     large: {
       width: theme.spacing(20),
@@ -58,10 +53,6 @@ const TheSidebar = () => {
           }}
         />
       </CSidebarNav>
-
-      <div className="account_logo_type">
-        <Avatar src={image} className={classes.large} alt={"user.username"} />
-      </div>
     </CSidebar>
   );
 };

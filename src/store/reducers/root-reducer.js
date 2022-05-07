@@ -5,8 +5,6 @@ import { reducer as formReducer } from "redux-form";
 import common from "./Common";
 import toggleDashboard from "./ToggleDashboard";
 import contributions from "./Contribution";
-import storage from "redux-persist/lib/storage";
-import { persistReducer } from "redux-persist";
 import { LOGOUT } from "store/actions/ActionTypes";
 
 

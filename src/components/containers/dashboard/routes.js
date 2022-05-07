@@ -5,7 +5,7 @@ const Dashboard = React.lazy(() => import('./views/dashboard/main/Dashboard'));
 const ChangePassword = React.lazy(() => import("./views/dashboard/user/ChangePassword"));
 const daily = React.lazy(() => import('./views/dashboard/contributions/Daily'))
 const monthly = React.lazy(() => import('./views/dashboard/contributions/Monthly'))
-const projectForm = React.lazy(() => import('./views/dashboard/contributions/WithdrawalForm'))
+
 
 
 const routes = [
@@ -29,7 +29,6 @@ const routes = [
 
   { path: "/dashboard/contribution/daily", name: "Daily Contribution", component: daily },
   { path: "/dashboard/contribution/monthly", name: "Monthly Contribution", component: monthly },
-  { path: "/dashboard/contribution/withdrawal", name: "Withdrawal Request", component: projectForm }
 ];
 
 

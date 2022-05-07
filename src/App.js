@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 import Snackbar from "@material-ui/core/Snackbar";
 import { Alert } from "@material-ui/lab";
 import { useSelector, useDispatch } from "react-redux";
-import { load_user, checkAuthenticated } from "./store/actions/Auth";
+import {checkAuthenticated } from "./store/actions/Auth";
 import MainApp from "./components/mainApp";
 import { hideMessage } from "store/actions/Common";
 import { BrowserRouter } from "react-router-dom";
-import { fetchMonthlyContributions, fetchDailyContributions } from "store/actions/Contributions";
-import { fetchBankAccountBonus,fetchBankAccountMain } from "store/actions/Contributions";
 import "./styles/style.js";
 
 

@@ -24,7 +24,7 @@ const Monthly = () => {
 
   return (
     <>
-      <h4 className="text-uppercase text-center mb-4 mt-4">Targeted Contributions</h4>
+      <h4 className="text-uppercase text-center mb-4 mt-4">All Targeted Contributions</h4>
       <CRow>
         <CCol>
           <CCard>
@@ -36,9 +36,11 @@ const Monthly = () => {
                   <tr>
                     <th className="text-center">S/N</th>
                     <th className="text-center">TransID</th>
+                    <th className="text-center">User ID</th>
                     <th className="text-center">Amount</th>
                     <th className="text-center">Date</th>
                     <th className="text-center">Type</th>
+                    <th className="text-center">Created By</th>
                     <th className="text-center">Trans Type</th>
                   </tr>
                 </thead>
@@ -92,6 +94,9 @@ const Monthly = () => {
                             <div>{bid.TransID}</div>
                           </td>
                           <td className="text-center">
+                            <div>{bid.user_account['email']}</div>
+                          </td>
+                          <td className="text-center">
                             <div>₦{numeral(bid.contribution_amount).format("0,0")}</div>
                           </td>
                           <td className="text-center">
@@ -99,6 +104,9 @@ const Monthly = () => {
                           </td>
                           <td className="text-center">
                             <div>{contribution_type}</div>
+                          </td>
+                          <td className="text-center">
+                            <div>{bid.created_by_admin_user}</div>
                           </td>
                           <td className="text-center">
                             <div className={` badge text-uppercase ${transactionStyle}`}>
