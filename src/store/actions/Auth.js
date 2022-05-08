@@ -100,18 +100,11 @@ export const login = ({ email, password }) => async dispatch => {
   }
 };
 // load user
-export const load_user = () => async dispatch => {
+export const load_user = () => async (dispatch,getState) => {
   if (localStorage.getItem("access")) {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `JWT ${localStorage.getItem("access")}`,
-        Accept: "application/json"
-      }
-    };
 
     try {
-      const res = await axiosInstance.get("auth/users/me/", config);
+      const res = await axiosInstance.get("auth/users/me/", tokenConfig(getState));
       localStorage.setItem("de_user", res.data.username);
       dispatch({
         type: USER_LOADED_SUCCESS,

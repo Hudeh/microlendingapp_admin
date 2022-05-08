@@ -1,6 +1,5 @@
 import * as actionTypes from "./ActionTypes";
 import axiosInstance from "util/api";
-import { setLoading, offLoading } from "./Common";
 import { tokenConfig } from "util/TokenConfig";
 
 // FETCH DailyContributions
