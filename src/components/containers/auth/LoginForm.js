@@ -92,7 +92,7 @@ export default function LoginForm() {
       <div className={classes.paper}>
       <img src={logo} alt="de-ghauzi" title="de-ghauzi"/>
          <Typography component="h1" variant="h5">
-           Welcome back login to continue
+           Welcome to admin dashboard
          </Typography>
         <form className={classes.form}>
           <TextField
