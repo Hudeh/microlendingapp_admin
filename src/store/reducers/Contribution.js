@@ -1,4 +1,4 @@
-import * as actionTypes from "store/actions/ActionTypes"
+import * as actionTypes from "store/actions/ActionTypes";
 
 const INITIAL_STATE = {
   dailyContributions: [],
@@ -15,11 +15,9 @@ const INITIAL_STATE = {
   main_next: "",
   main_previous: "",
   loading: true
-
 };
 
-
-const auction = (state=INITIAL_STATE, action) => {
+const auction = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case actionTypes.FETCH_CONTRIBUTION_DAILY_SUCCESS:
       return {
@@ -27,13 +25,13 @@ const auction = (state=INITIAL_STATE, action) => {
         dailyContributions: action.payload.results,
         main_count: action.payload.count,
         main_next: action.payload.next,
-        main_previous:action.payload.previous,
+        main_previous: action.payload.previous,
         loading: false
       };
-    case actionTypes.FETCH_CONTRIBUTION_TARGET_SUCCESS :
+    case actionTypes.FETCH_CONTRIBUTION_TARGET_SUCCESS:
       return {
         ...state,
-        monthlyContributions: action.payload,
+        monthlyContributions: action.payload.results,
         main_count: action.payload.count,
         main_next: action.payload.next,
         main_previous: action.payload.previous,
@@ -62,6 +60,6 @@ const auction = (state=INITIAL_STATE, action) => {
     default:
       return state;
   }
-}
+};
 
 export default auction;
