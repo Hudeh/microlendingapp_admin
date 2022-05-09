@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { change_password } from "store/actions/Auth";
+import { useDispatch, useSelector } from "react-redux";
+import { change_password, logout } from "store/actions/Auth";
 
 const ChangePasswordForm = () => {
   const dispatch = useDispatch();
-  const [requestSent, setRequestSent] = useState(false);
+  const requestSent = useSelector(state => state.authReducer.changePassword);
   const [formData, setFormData] = useState({
     new_password: "",
     re_new_password: "",
@@ -18,12 +18,13 @@ const ChangePasswordForm = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    dispatch(change_password({current_password, new_password, re_new_password}));
-    setRequestSent(true);
+    dispatch(change_password({ current_password, new_password, re_new_password }));
   };
 
   if (requestSent) {
-    return <Redirect to="/dashboard" />;
+    setTimeout(() => {
+      dispatch(logout());
+    }, 3000);
   }
 
   return (

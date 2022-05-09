@@ -24,10 +24,9 @@ import {
   FETCH_PERSONAL_PROFILE_SUCCESS,
   FETCH_PERSONAL_PROFILE_FAIL,
   GET_SINGLE_PERSONAL_PROFILE_FAIL,
-  GET_SINGLE_PERSONAL_PROFILE_SUCCESS
+  GET_SINGLE_PERSONAL_PROFILE_SUCCESS,
+  HIDE_MESSAGE
 } from "./ActionTypes";
-
-
 
 export const checkAuthenticated = () => async dispatch => {
   if (localStorage.getItem("access")) {
@@ -75,7 +74,7 @@ export const login = ({ email, password }) => async dispatch => {
       payload: "You've successfully logged in"
     });
     dispatch(stopSubmit("LoginForm"));
-    dispatch(reset("LoginForm"))
+    dispatch(reset("LoginForm"));
   } catch (err) {
     dispatch(setLoading());
     dispatch({ type: LOGIN_FAIL });
@@ -100,35 +99,26 @@ export const login = ({ email, password }) => async dispatch => {
   }
 };
 // load user
-export const load_user = () => async (dispatch,getState) => {
-  if (localStorage.getItem("access")) {
-
-    try {
-      const res = await axiosInstance.get("auth/users/me/", tokenConfig(getState));
-      localStorage.setItem("de_user", res.data.username);
-      dispatch({
-        type: USER_LOADED_SUCCESS,
-        payload: res.data
-      });
-    } catch (err) {
-      dispatch({
-        type: USER_LOADED_FAIL
-      });
-    }
-  } else {
+export const load_user = () => async (dispatch, getState) => {
+  try {
+    const res = await axiosInstance.get("auth/users/me/", tokenConfig(getState));
+    localStorage.setItem("de_user", res.data.username);
+    dispatch({
+      type: USER_LOADED_SUCCESS,
+      payload: res.data
+    });
+  } catch (err) {
     dispatch({
       type: USER_LOADED_FAIL
     });
   }
 };
+
 // CHANGE PASSWORD
-export const change_password = ({
-  current_password,
-  new_password,
-  re_new_password
-}) => async (dispatch,getState) => {
-
-
+export const change_password = ({ current_password, new_password, re_new_password }) => async (
+  dispatch,
+  getState
+) => {
   const body = { current_password, new_password, re_new_password };
   dispatch(setLoading());
   try {
@@ -136,10 +126,10 @@ export const change_password = ({
     dispatch({
       type: PASSWORD_CHANGE_SUCCESS
     });
-    dispatch({ type: SHOW_SUCCESS_MESSAGE, payload: "Password Changed Successfully" });
+    dispatch({ type: SHOW_SUCCESS_MESSAGE, payload: "Password Change Success" });
   } catch (err) {
     dispatch({ type: PASSWORD_CHANGE_FAIL });
-    dispatch({ type: SHOW_SUCCESS_MESSAGE, payload: "Password Changed Fail" });
+    dispatch({ type: SHOW_ERROR_MESSAGE, payload: "Password Change Fail" });
   }
 };
 
