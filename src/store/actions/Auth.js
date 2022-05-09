@@ -126,17 +126,13 @@ export const change_password = ({
   current_password,
   new_password,
   re_new_password
-}) => async dispatch => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  };
+}) => async (dispatch,getState) => {
+
 
   const body = { current_password, new_password, re_new_password };
   dispatch(setLoading());
   try {
-    await axiosInstance.post("/auth/users/set_password/", body, config);
+    await axiosInstance.post("/auth/users/set_password/", body, tokenConfig(getState));
     dispatch({
       type: PASSWORD_CHANGE_SUCCESS
     });
