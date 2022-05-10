@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { change_password, logout } from "store/actions/Auth";
 
 const ChangePasswordForm = () => {
@@ -18,12 +18,13 @@ const ChangePasswordForm = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    dispatch(change_password({ current_password, new_password, re_new_password }));
+    dispatch(change_password({current_password, new_password, re_new_password}));
   };
 
   if (requestSent) {
     setTimeout(() => {
-      dispatch(logout());
+      dispatch(logout())
+      
     }, 3000);
   }
 
